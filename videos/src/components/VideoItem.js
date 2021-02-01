@@ -6,16 +6,19 @@ class VideoItem extends React.Component {
         const { title, thumbnails } = this.props.video.snippet;
         const videoURL = `https://youtu.be/${this.props.video.id.videoId}`;
         return (
-            <div className="video-item item">
+            <div
+                className="video-item item"
+                onClick={() => this.props.onVideoSelect(this.props.video)}
+            >
                 <img
                     className="ui image"
                     src={thumbnails.medium.url}
                     alt={title}
                 />
                 <div className="content">
-                    <a className="Header" href={videoURL}>
+                    <div className="Header" href={videoURL}>
                         {title}
-                    </a>
+                    </div>
                 </div>
             </div>
         );
