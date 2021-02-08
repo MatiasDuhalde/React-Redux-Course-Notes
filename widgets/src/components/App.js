@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Accordion from './Accordion';
 import Dropdown from './Dropdown';
+import Route from './Route';
 import Search from './Search';
 import Translate from './Translate';
 
@@ -36,32 +37,29 @@ const options = [
 
 const App = () => {
     const [selected, setSelected] = useState(options[0]);
-    // const [showDropdown, setShowDropdown] = useState(true);
 
     return (
         <div>
-            {/* <button
-                onClick={() => setShowDropdown(!showDropdown)}
-                className="ui button"
-            >
-                Toggle dropdown
-            </button> */}
-            {/* <Accordion items={items} /> */}
-            {/* <Search /> */}
-            {/* {showDropdown ? (
-                <div>
-                    <Dropdown
-                        label={'Select a Color'}
-                        options={options}
-                        selected={selected}
-                        onSelectedChange={setSelected}
-                    />
-                    <h1 style={{ color: selected.value }}>
-                        This text is {selected.value}
-                    </h1>
-                </div>
-            ) : null} */}
-            <Translate />
+            <Route path="/">
+                <Accordion items={items} />;
+            </Route>
+            <Route path="/list">
+                <Search />
+            </Route>
+            <Route path="/dropdown">
+                <Dropdown
+                    label={'Select a Color'}
+                    options={options}
+                    selected={selected}
+                    onSelectedChange={setSelected}
+                />
+                <h1 style={{ color: selected.value }}>
+                    This text is {selected.value}
+                </h1>
+            </Route>
+            <Route path="/translate">
+                <Translate />
+            </Route>
         </div>
     );
 };
