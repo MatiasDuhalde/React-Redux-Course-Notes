@@ -48,12 +48,17 @@ const App = () => {
             {/* <Accordion items={items} /> */}
             {/* <Search /> */}
             {showDropdown ? (
-                <Dropdown
-                    label={'Select a Color'}
-                    options={options}
-                    selected={selected}
-                    onSelectedChange={setSelected}
-                />
+                <div>
+                    <Dropdown
+                        label={'Select a Color'}
+                        options={options}
+                        selected={selected}
+                        onSelectedChange={setSelected}
+                    />
+                    <h1 style={{ color: selected.value }}>
+                        This text is {selected.value}
+                    </h1>
+                </div>
             ) : null}
         </div>
     );
