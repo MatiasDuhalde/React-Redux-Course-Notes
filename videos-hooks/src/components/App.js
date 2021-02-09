@@ -1,19 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 import youtube from '../api/youtube';
 
-class App extends React.Component {
-    state = { videos: [], selectedVideo: null };
+const App = () => {
+    const [videos, setVideos] = useState([]);
+    const [selectedVideo, setSelectedVideo] = useState(null);
 
-    componentDidMount() {
-        this.onTermSubmit('JavaScript');
-    }
-
-    onTermSubmit = async term => {
+    const onTermSubmit = async term => {
         if (!term) {
-            this.setState({ videos: [] });
+            setVideos([]);
             return;
         }
         const response = await youtube.get('/search', {
@@ -22,36 +19,32 @@ class App extends React.Component {
             },
         });
 
-        this.setState({
-            videos: response.data.items,
-            selectedVideo: response.data.items[0],
-        });
+        setVideos(response.data.items);
+        setSelectedVideo(response.data.items[0]);
     };
 
-    onVideoSelect = video => {
-        this.setState({ selectedVideo: video });
-    };
+    useEffect(() => {
+        onTermSubmit('JavaScript');
+    }, []);
 
-    render() {
-        return (
-            <div className="ui container">
-                <SearchBar onSubmit={this.onTermSubmit} />
-                <div className="ui grid">
-                    <div className="ui row">
-                        <div className="eleven wide column">
-                            <VideoDetail video={this.state.selectedVideo} />
-                        </div>
-                        <div className="five wide column">
-                            <VideoList
-                                videos={this.state.videos}
-                                onVideoSelect={this.onVideoSelect}
-                            />
-                        </div>
+    return (
+        <div className="ui container">
+            <SearchBar onSubmit={onTermSubmit} />
+            <div className="ui grid">
+                <div className="ui row">
+                    <div className="eleven wide column">
+                        <VideoDetail video={selectedVideo} />
+                    </div>
+                    <div className="five wide column">
+                        <VideoList
+                            videos={videos}
+                            onVideoSelect={video => setSelectedVideo(video)}
+                        />
                     </div>
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default App;
