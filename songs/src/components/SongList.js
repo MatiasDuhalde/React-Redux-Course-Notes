@@ -27,7 +27,6 @@ class SongList extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state.selectedSong);
     return { songs: state.songs };
 };
 
