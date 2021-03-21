@@ -6,8 +6,6 @@ const CLIENT_ID =
     '477165084783-p36s62gb1uu15064vluileq8l9ftf37n.apps.googleusercontent.com';
 
 class GoogleAuth extends React.Component {
-    state = { isSignedIn: null };
-
     onAuthChange = isSignedIn => {
         if (isSignedIn) {
             this.props.signIn();
@@ -33,16 +31,16 @@ class GoogleAuth extends React.Component {
                 })
                 .then(() => {
                     this.auth = window.gapi.auth2.getAuthInstance();
-                    this.setState({ isSignedIn: this.auth.isSignedIn.get() });
+                    this.onAuthChange(this.auth.isSignedIn.get());
                     this.auth.isSignedIn.listen(this.onAuthChange);
                 });
         });
     }
 
     renderAuthButton() {
-        if (this.state.isSignedIn === null) {
+        if (this.props.isSignedIn === null) {
             return null;
-        } else if (this.state.isSignedIn) {
+        } else if (this.props.isSignedIn) {
             return (
                 <button
                     onClick={this.onSignOutClick}
@@ -70,4 +68,8 @@ class GoogleAuth extends React.Component {
     }
 }
 
-export default connect(null, { signIn, signOut })(GoogleAuth);
+const mapStateToProps = state => {
+    return { isSignedIn: state.auth.isSignedIn };
+};
+
+export default connect(mapStateToProps, { signIn, signOut })(GoogleAuth);
