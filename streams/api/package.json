@@ -1,0 +1,14 @@
+{
+    "name": "api",
+    "version": "1.0.0",
+    "description": "Records API for Tweetch streaming service",
+    "main": "index.js",
+    "scripts": {
+        "start": "json-server -p 3001 -w db.json"
+    },
+    "author": "Matias Duhalde",
+    "license": "ISC",
+    "dependencies": {
+        "json-server": "^0.16.3"
+    }
+}
