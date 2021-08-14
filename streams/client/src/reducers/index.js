@@ -5,6 +5,6 @@ import streamsReducer from './streamsReducer';
 // React-final-form must be wired
 
 export default combineReducers({
-    auth: authReducer,
-    streams: streamsReducer,
+  auth: authReducer,
+  streams: streamsReducer,
 });
