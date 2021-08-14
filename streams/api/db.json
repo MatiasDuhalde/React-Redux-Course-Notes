@@ -1,3 +1,22 @@
 {
-    "streams": []
+  "streams": [
+    {
+      "title": "My Stream",
+      "description": "This was made by me",
+      "userId": "107346035344174517834",
+      "id": 4
+    },
+    {
+      "title": "My Stream 2",
+      "description": "This was made by me once again",
+      "userId": "107346035344174517834",
+      "id": 5
+    },
+    {
+      "title": "Another test",
+      "description": "after refactor!",
+      "userId": "107346035344174517834",
+      "id": 7
+    }
+  ]
 }
