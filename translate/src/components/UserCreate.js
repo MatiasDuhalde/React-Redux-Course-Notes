@@ -1,7 +1,7 @@
 import React from 'react';
 import Field from './Field';
 import Button from './Button';
-import LanguageContext from '../contexts/LanguageContext';
+import LanguageContext from '../contexts/LocaleContext';
 
 class UserCreate extends React.Component {
   static contextType = LanguageContext;
@@ -22,8 +22,8 @@ class UserCreate extends React.Component {
   render() {
     return (
       <div className="ui form">
-        <Field name="name" label={this.translations.name[this.context]} />
-        <Button>{this.translations.submit[this.context]}</Button>
+        <Field name="name" label={this.translations.name[this.context.locale]} />
+        <Button>{this.translations.submit[this.context.locale]}</Button>
       </div>
     );
   }
